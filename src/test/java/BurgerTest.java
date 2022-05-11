@@ -117,7 +117,7 @@ public class BurgerTest {
         burger.addIngredient(tomato);
         burger.addIngredient(onion);
         burger.moveIngredient(3,1);
-        assertEquals(blackBun.getPrice()*2+cutlet.getPrice()+originalSauce.getPrice()+tomato.getPrice(),burger.getPrice(),0);
+        assertEquals(blackBun.getPrice()*2+cutlet.getPrice()+originalSauce.getPrice()+tomato.getPrice()+onion.getPrice(),burger.getPrice(),0);
     }
     @Test
     public void burgerIngredientMove_ReceiptTest (){
