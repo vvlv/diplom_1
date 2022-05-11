@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static praktikum.IngredientType.FILLING;
 import static praktikum.IngredientType.SAUCE;
 
@@ -52,5 +53,15 @@ public class DatabaseTest {
         Mockito.when(db.availableBuns()).thenReturn(buns);
         assertEquals(buns,db.availableBuns());
 
+    }
+    @Test
+    public void qww () {
+        Database database = new Database();
+        assertNotNull(database.availableBuns());
+    }
+    @Test
+    public void qww2 () {
+        Database database = new Database();
+        assertNotNull(database.availableIngredients());
     }
 }
