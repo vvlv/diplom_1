@@ -1,66 +1,74 @@
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+
 import praktikum.Bun;
 import praktikum.Database;
 import praktikum.Ingredient;
 import praktikum.IngredientType;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static praktikum.IngredientType.FILLING;
 import static praktikum.IngredientType.SAUCE;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 public class DatabaseTest {
-    Database db = Mockito.mock(Database.class);
+    //Database db = Mockito.mock(Database.class);
+    Database db = new Database();
 
 
 
     @Test
     public void availableBunsTest () {
         db.availableBuns();
-        Mockito.verify(db).availableBuns();
+        assertNotNull(db.availableBuns());
+       // Mockito.verify(db).availableBuns();
     }
     @Test
     public void availableIngredientsTest () {
         db.availableIngredients();
-        Mockito.verify(db).availableIngredients();
+        assertNotNull(db.availableIngredients());
     }
+
     @Test
     public void availableIngredients_dataTest () {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient(IngredientType.FILLING, "cutlet", 100));
-        ingredients.add(new Ingredient(IngredientType.SAUCE, "test", 200));
-        ingredients.add(new Ingredient(IngredientType.SAUCE, "testFloat", 200.50f));
+        List<Ingredient> ingredientsDB = db.availableIngredients();
+        ingredients.add(new Ingredient(IngredientType.SAUCE, "hot sauce", 100));
+        ingredients.add(new Ingredient(IngredientType.SAUCE, "sour cream", 200));
+        ingredients.add(new Ingredient(IngredientType.SAUCE, "chili sauce", 300));
 
-        Mockito.when(db.availableIngredients()).thenReturn(ingredients);
-        assertEquals(ingredients,db.availableIngredients());
+        ingredients.add(new Ingredient(IngredientType.FILLING, "cutlet", 100));
+        ingredients.add(new Ingredient(IngredientType.FILLING, "dinosaur", 200));
+        ingredients.add(new Ingredient(IngredientType.FILLING, "sausage", 300));
+
+
+        assertEquals(ingredients,ingredientsDB);
+        //assertEquals(ingredients,db.availableIngredients());
 
     }
+
     @Test
     public void availableBuns_dataTest () {
         List<Bun> buns = new ArrayList<>();
-        buns.add(new Bun("тест", 10));
-        buns.add(new Bun("test", 300));
-        buns.add(new Bun("red bun", 150.78f));
-
-        Mockito.when(db.availableBuns()).thenReturn(buns);
-        assertEquals(buns,db.availableBuns());
-
+        List<Bun> bunsDB = db.availableBuns();
+        buns.add(new Bun("black bun", 100));
+        buns.add(new Bun("white bun", 200));
+        buns.add(new Bun("red bun", 300));
+        assertEquals(bunsDB,buns);
     }
     @Test
-    public void qww () {
+    public void availableBunsNotNullTest () {
         Database database = new Database();
         assertNotNull(database.availableBuns());
     }
     @Test
-    public void qww2 () {
+    public void availableIngredientsNotNullTest () {
         Database database = new Database();
         assertNotNull(database.availableIngredients());
     }
