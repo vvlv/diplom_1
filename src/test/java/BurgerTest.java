@@ -26,7 +26,6 @@ public class BurgerTest {
     //@Mock
     Burger burger = new Burger();
 
-    Bun baseBun = new Bun("base bun",100);
     Bun blackBun = new Bun("black bun",105.50f);
     Ingredient cutlet = new Ingredient(FILLING,"cutlet",135.45f);
     Ingredient originalSauce = new Ingredient(SAUCE,"original sauce",40);
@@ -56,7 +55,9 @@ public class BurgerTest {
         Mockito.when(ingredient.getType()).thenReturn(SAUCE);
         Burger burger = new Burger();
         burger.addIngredient(ingredient);
-        assertTrue(ingredient.getName().equals("ingredient bun")&&ingredient.getType().equals(SAUCE)&&ingredient.getPrice()==112.3f);
+        assertEquals("ingredient bun",ingredient.getName());
+        assertEquals(SAUCE,ingredient.getType());
+        assertEquals(ingredient.getPrice(),112.3f,0);
     }
     @Test
     public void baseBunPriceTest () {
@@ -149,7 +150,7 @@ public class BurgerTest {
     }
 
     //Метод для генерации чек с данными объявленными в начале класса
-    public String receiptTestMethodGenerate (List<Ingredient> ingredientsTest,float receiptPrice) {
+    private String receiptTestMethodGenerate (List<Ingredient> ingredientsTest,float receiptPrice) {
         StringBuilder BaseBurgerReceipt = new StringBuilder(String.format("(==== %s ====)%n", blackBun.getName()));
 
         for (Ingredient ingredient : ingredientsTest) {
